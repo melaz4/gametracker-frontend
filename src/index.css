@@ -1,0 +1,54 @@
+:root{
+	--bg: #f7f7fb;
+	--card-bg: #fff;
+	--muted: #6b7280;
+}
+
+html,body,#root{
+	height:100%;
+}
+
+body{
+	margin:0;
+	background:var(--bg);
+	color:#0f172a;
+	-webkit-font-smoothing:antialiased;
+	-moz-osx-font-smoothing:grayscale;
+	font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+.game-form input, .game-form textarea{
+	width:100%;
+	padding:8px 10px;
+	margin:6px 0;
+	border:1px solid #e5e7eb;
+	border-radius:6px;
+	box-sizing:border-box;
+}
+
+.game-form .row{display:flex; gap:8px}
+.game-form .row input{flex:1}
+.game-form textarea{min-height:80px}
+.game-form button{padding:8px 12px; border-radius:6px; border:none; background:#111827; color:#fff}
+
+.games-grid{
+	display:grid;
+	grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+	gap:12px;
+}
+
+.game-card{
+	background:var(--card-bg);
+	border-radius:8px;
+	overflow:hidden;
+	box-shadow:0 1px 2px rgba(16,24,40,0.06), 0 1px 3px rgba(16,24,40,0.04);
+	display:flex;
+	flex-direction:column;
+}
+.game-cover{height:140px; background:#f3f4f6; display:flex; align-items:center; justify-content:center}
+.game-cover img{width:100%; height:100%; object-fit:cover}
+.game-cover--placeholder{color:var(--muted)}
+.game-body{padding:12px}
+.game-title{margin:0 0 6px; font-size:1.05rem}
+.game-desc{margin:0 0 8px; color:var(--muted); font-size:0.95rem}
+.game-dev{margin:0; font-size:0.9rem}
