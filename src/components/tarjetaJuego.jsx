@@ -1,6 +1,7 @@
 import React from 'react'
 
-export default function TarjetaJuego({ nombre, descripcion, imagen, desarrollador }) {
+export default
+ function TarjetaJuego({ nombre, genero, descripcion, imagen, desarrollador }) {
 	return (
 		<article className="game-card">
 			<div className="game-cover">
@@ -14,6 +15,7 @@ export default function TarjetaJuego({ nombre, descripcion, imagen, desarrollado
 			<div className="game-body">
 				<h3 className="game-title">{nombre}</h3>
 				<p className="game-desc">{descripcion}</p>
+				<p className="game-gender">{genero}</p>
 				<p className="game-dev">Desarrollador: <strong>{desarrollador}</strong></p>
 			</div>
 		</article>

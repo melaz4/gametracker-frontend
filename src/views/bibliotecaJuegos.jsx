@@ -3,7 +3,7 @@ import TarjetaJuego from '../components/tarjetaJuego'
 
 export default function BibliotecaJuegos() {
 	const [games, setGames] = useState([])
-	const [form, setForm] = useState({ nombre: '', descripcion: '', desarrollador: '', imagen: '' })
+	const [form, setForm] = useState({ nombre: '', descripcion: '', genero: '', desarrollador: '', imagen: '' })
 
 	function handleChange(e) {
 		const { name, value } = e.target
@@ -18,12 +18,13 @@ export default function BibliotecaJuegos() {
 			id: Date.now(),
 			nombre: form.nombre.trim(),
 			descripcion: form.descripcion.trim(),
+			genero: form.genero.trim() || 'No especificado',
 			desarrollador: form.desarrollador.trim() || 'Desconocido',
 			imagen: form.imagen.trim() || '',
 		}
 
 		setGames((g) => [newGame, ...g])
-		setForm({ nombre: '', descripcion: '', desarrollador: '', imagen: '' })
+		setForm({ nombre: '', descripcion: '',genero: '', desarrollador: '', imagen: '' })
 	}
 
 	return (
@@ -31,13 +32,23 @@ export default function BibliotecaJuegos() {
 			<h2>Biblioteca de Juegos</h2>
 
 			<form className="game-form" onSubmit={handleSubmit} style={{ marginBottom: 18 }}>
+
 				<div className="row">
 					<input name="nombre" placeholder="Nombre" value={form.nombre} onChange={handleChange} />
+				</div>
+
+				<div>
 					<input name="desarrollador" placeholder="Desarrollador" value={form.desarrollador} onChange={handleChange} />
 				</div>
+
 				<div className="row">
+					<input name="genero" placeholder="Género" value={form.genero} onChange={handleChange} />
+				</div>
+
+				<div>
 					<input name="imagen" placeholder="URL de imagen (opcional)" value={form.imagen} onChange={handleChange} />
 				</div>
+				
 				<div className="row">
 					<textarea name="descripcion" placeholder="Descripción" value={form.descripcion} onChange={handleChange} />
 				</div>
@@ -51,7 +62,7 @@ export default function BibliotecaJuegos() {
 			) : (
 				<div className="games-grid">
 					{games.map((g) => (
-						<TarjetaJuego key={g.id} nombre={g.nombre} descripcion={g.descripcion} desarrollador={g.desarrollador} imagen={g.imagen} />
+						<TarjetaJuego key={g.id} nombre={g.nombre} descripcion={g.descripcion} genero={g.genero} desarrollador={g.desarrollador} imagen={g.imagen} />
 					))}
 				</div>
 			)}
