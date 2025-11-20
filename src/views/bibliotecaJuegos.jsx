@@ -1,5 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import TarjetaJuego from '../components/tarjetaJuego'
+
+useEffect(() => {
+	fetch("http://localhost:5000/api/juegos")
+		.then(res => res.json())
+		.then(data => setGames(data))
+		.catch(err => console.error("Error cargando juegos:", err));
+}, []);
+
 
 export default function BibliotecaJuegos() {
 	const [games, setGames] = useState([])
@@ -10,22 +18,32 @@ export default function BibliotecaJuegos() {
 		setForm((s) => ({ ...s, [name]: value }))
 	}
 
-	function handleSubmit(e) {
-		e.preventDefault()
-		if (!form.nombre.trim()) return alert('El nombre es obligatorio')
+	async function handleSubmit(e) {
+	e.preventDefault();
 
-		const newGame = {
-			id: Date.now(),
-			nombre: form.nombre.trim(),
-			descripcion: form.descripcion.trim(),
-			genero: form.genero.trim() || 'No especificado',
-			desarrollador: form.desarrollador.trim() || 'Desconocido',
-			imagen: form.imagen.trim() || '',
-		}
+	if (!form.nombre.trim()) return alert('El nombre es obligatorio');
 
-		setGames((g) => [newGame, ...g])
-		setForm({ nombre: '', descripcion: '',genero: '', desarrollador: '', imagen: '' })
+	try {
+		const response = await fetch("http://localhost:5000/api/juegos", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(form)
+		});
+
+		if (!response.ok) throw new Error("Error al guardar");
+
+		const juegoCreado = await response.json();
+
+		setGames((prev) => [juegoCreado, ...prev]);
+
+		setForm({ nombre: '', descripcion: '', genero: '', desarrollador: '', imagen: '' });
+
+	} catch (error) {
+		console.error("Error guardando juego:", error);
+		alert("No se pudo guardar el juego");
 	}
+}
+
 
 	return (
 		<section>
