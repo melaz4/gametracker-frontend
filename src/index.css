@@ -1,54 +1,215 @@
-:root{
-	--bg: #f7f7fb;
-	--card-bg: #fff;
-	--muted: #201e1e;
+:root {
+  --color-bg: #0f172a;
+  --color-bg-soft: #1e293b;
+  --color-card: #1e293b;
+  --color-text: #f1f5f9;
+  --color-accent: #3b82f6;
+  --color-danger: #ef4444;
+
+  --radius: 10px;
 }
 
-html,body,#root{
-	height:100%;
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: "Segoe UI", sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-body{
-	margin:0;
-	background:var(--bg);
-	color:#252629;
-	-webkit-font-smoothing:antialiased;
-	-moz-osx-font-smoothing:grayscale;
-	font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background: var(--color-bg-soft);
+  align-items: center;
 }
 
-.game-form input, .game-form textarea{
-	width:100%;
-	padding:8px 10px;
-	margin:6px 0;
-	border:1px solid #e5e7eb;
-	border-radius:6px;
-	box-sizing:border-box;
+.logo {
+  margin: 0;
+  font-size: 26px;
 }
 
-.game-form .row{display:flex; gap:8px}
-.game-form .row input{flex:1}
-.game-form textarea{min-height:80px}
-.game-form button{padding:8px 12px; border-radius:6px; border:none; background:#111827; color:#fff}
-
-.games-grid{
-	display:grid;
-	grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-	gap:12px;
+.nav-btn {
+  padding: 8px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--radius);
+  font-weight: bold;
 }
 
-.game-card{
-	background:var(--card-bg);
-	border-radius:8px;
-	overflow:hidden;
-	box-shadow:0 1px 2px rgba(16,24,40,0.06), 0 1px 3px rgba(16,24,40,0.04);
-	display:flex;
-	flex-direction:column;
+.nav-danger {
+  background: var(--color-danger);
+  color: white;
 }
-.game-cover{height:140px; background:#f3f4f6; display:flex; align-items:center; justify-content:center}
-.game-cover img{width:100%; height:100%; object-fit:cover}
-.game-cover--placeholder{color:var(--muted)}
-.game-body{padding:12px}
-.game-title{margin:0 0 6px; font-size:1.05rem}
-.game-desc{margin:0 0 8px; color:var(--muted); font-size:0.95rem}
-.game-dev{margin:0; font-size:0.9rem}
+
+.tabs-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tab-btn {
+  padding: 6px 14px;
+  background: var(--color-bg-soft);
+  border: 1px solid #334155;
+  border-radius: var(--radius);
+  color: white;
+  cursor: pointer;
+}
+
+.tab-btn.active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.game-card {
+  background: var(--color-card);
+  padding: 15px;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+.game-cover {
+  height: 160px;
+  background: #334155;
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.game-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.game-cover--placeholder {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  color: #cbd5e1;
+}
+
+.game-body h3 {
+  margin: 0;
+  margin-bottom: 6px;
+}
+
+.game-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+}
+
+.btn-edit,
+.btn-resena-add,
+.btn-resena-delete {
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--radius);
+  color: white;
+  font-size: 14px;
+}
+
+.btn-edit {
+  background: #3b82f6;
+}
+
+.btn-resena-add {
+  background: #10b981;
+}
+
+.btn-resena-delete {
+  background: #ef4444;
+}
+
+.game-form-container {
+  max-width: 450px;
+  background: var(--color-bg-soft);
+  padding: 20px;
+  border-radius: var(--radius);
+  margin-top: 20px;
+}
+
+.game-form input,
+.game-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: var(--radius);
+  border: 1px solid #475569;
+  background: #0f172a;
+  color: white;
+}
+
+.game-form button {
+  width: 100%;
+  padding: 12px;
+  background: var(--color-accent);
+  border: none;
+  border-radius: var(--radius);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background: var(--color-bg-soft);
+  padding: 20px;
+  border-radius: var(--radius);
+  width: 90%;
+  max-width: 450px;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  color: white;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  color: white;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.resena-item {
+  background: #0f172a;
+  padding: 12px;
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+  border: 1px solid #334155;
+}
+
+.input-busqueda {
+  width: 100%;
+  padding: 10px;
+  border-radius: var(--radius);
+  border: 1px solid #475569;
+  background: #0f172a;
+  color: white;
+  margin-bottom: 20px;
+}

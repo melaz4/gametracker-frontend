@@ -1,37 +1,48 @@
-import React from 'react';
+import React from "react";
 
 export default function TarjetaJuego({
   _id,
   nombre,
-  genero,
   descripcion,
-  imagen,
+  genero,
   desarrollador,
-  onDelete
+  imagen,
+  onDelete,
+  onEdit,
+  onOpenResenas
 }) {
+
+  const generos = Array.isArray(genero) ? genero : genero ? [genero] : [];
+
   return (
     <article className="game-card">
       <div className="game-cover">
         {imagen ? (
-          <img src={imagen} alt={`${nombre} cover`} />
+          <img src={imagen} alt={nombre} />
         ) : (
-          <div className="game-cover--placeholder">No Image</div>
+          <div className="game-cover--placeholder">Sin imagen</div>
         )}
       </div>
 
       <div className="game-body">
         <h3 className="game-title">{nombre}</h3>
-        <p className="game-desc">{descripcion}</p>
-        <p className="game-gender">{genero}</p>
-        <p className="game-dev">Desarrollador: <strong>{desarrollador}</strong></p>
+        <p className="game-desc">{descripcion?.substring(0, 80)}...</p>
 
-        <button
-          className="btn-delete"
-          onClick={() => onDelete(_id)} // ← PASAR UNA FUNCIÓN, NO INVOCAR
-          style={{ marginTop: "10px", backgroundColor: "red", color: "white" }}
-        >
-          Eliminar
-        </button>
+        <p className="game-gender">
+          <strong>Géneros:</strong> {generos.join(", ")}
+        </p>
+
+        <div className="game-actions">
+          <button className="btn-edit" onClick={onEdit}>Editar</button>
+
+          <button className="btn-resena-add" onClick={() => onOpenResenas(_id)}>
+            Reseñas
+          </button>
+
+          <button className="btn-resena-delete" onClick={() => onDelete(_id)}>
+            Eliminar
+          </button>
+        </div>
       </div>
     </article>
   );
